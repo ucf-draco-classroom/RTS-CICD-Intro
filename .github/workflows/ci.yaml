@@ -1,0 +1,29 @@
+# .github/workflows/ci.yaml
+name: C two-tasks CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+
+      - name: Build
+        run: make -j
+
+      - name: Run & assert
+        run: make test
+
+      - name: Upload run logs (artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: rt_hello-output
+          path: build/output.txt
