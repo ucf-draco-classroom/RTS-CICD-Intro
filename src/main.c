@@ -10,7 +10,7 @@
 #include <time.h>
 
 typedef struct {
-  const char* name;
+  const char* name
   int period_ms;
   int iterations;
 } task_params_t;
